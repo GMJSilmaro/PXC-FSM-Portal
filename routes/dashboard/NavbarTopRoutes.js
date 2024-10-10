@@ -97,27 +97,8 @@ const NavbarDefault = [
 				link: '/dashboard/customers/list'
 			}
 		],
-		isAuthenticated: true,
 	},
-	{
-		id: uuid(),
-		menuitem: 'Locations',
-		link: '#',
-		badge: 'NEW',
-		children: [
-			{
-				id: uuid(),
-				header: true,
-				header_text: 'Site / Locations'
-			},
-			{
-				id: uuid(),
-				menuitem: 'View Locations',
-				link: '/dashboard/locations/list'
-			}
-		],
-		isAuthenticated: true,
-	}
+
 ];
 
 export default NavbarDefault;

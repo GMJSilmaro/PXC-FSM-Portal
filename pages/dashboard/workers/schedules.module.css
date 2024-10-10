@@ -1,156 +1,190 @@
-.custom-work-days.e-schedule .e-month-view .e-work-days.willsmith,
-.custom-work-days.e-schedule .e-vertical-view .e-work-hours.willsmith {
-    background-color: rgb(250 235 215 / 50%);
+.drag-sample-wrapper {
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.custom-work-days.e-schedule .e-month-view .e-work-days.alice,
-.custom-work-days.e-schedule .e-vertical-view .e-work-hours.alice {
-    background-color: rgb(222 236 252 / 50%);
+.schedule-container {
+  padding-right: 10px;
+  width: 100%;
 }
 
-.custom-work-days.e-schedule .e-month-view .e-work-days.robson,
-.custom-work-days.e-schedule .e-vertical-view .e-work-hours.robson {
-    background-color: rgb(222 238 172 / 50%);
+.title-container {
+  padding-bottom: 10px;
 }
 
-.custom-work-days.e-schedule .e-vertical-view .e-resource-cells {
-    height: 66px;
+.treeview-external-drag #waiting {
+  height: 100%;
+  padding: 0;
 }
 
-.custom-work-days.e-schedule .template-wrap {
-    display: flex;
-    text-align: left;
+.treeview-external-drag #waitdetails {
+  width: 95%;
+  float: left;
+  height: 100%;
+  padding: 0;
 }
 
-.custom-work-days.e-schedule .template-wrap .resource-image {
-    background-repeat: no-repeat;
-    background-size: 45px;
-    height: 45px;
-    width: 45px;
+.e-schedule.schedule-drag-drop .e-resource-cells.e-parent-node .template-wrap {
+  padding: 3px 0px;
 }
 
-.custom-work-days.e-schedule .template-wrap .resource-details {
-    padding-left: 10px;
+.title-text {
+  font-size: 18px;
+  margin: 0px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.custom-work-days.e-schedule .template-wrap .resource-details .resource-name {
-    font-size: 16px;
-    font-weight: 500;
-    margin-top: 5px;
+
+.treeview-external-drag #waitlist {
+  width: 100%;
+  height: 50%;
+  font-weight: bold;
+  font-family: "Segoe UI";
+  font-size: 12px;
+  padding: 5px 0 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.custom-work-days.e-schedule.e-device .template-wrap .resource-details .resource-name {
-    font-size: inherit;
-    font-weight: inherit;
+.treeview-external-drag #waitcategory {
+  height: 50%;
+  font-family: "Segoe UI";
+  font-size: 10px;
+  opacity: 0.6;
+  padding-left: 10px;
+  padding-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.custom-work-days.e-schedule.e-device .e-resource-tree-popup .e-fullrow {
-    height: 50px;
+.treeview-external-drag .e-list-text, .treeview-external-drag.e-rtl .e-list-text, .e-bigger .treeview-external-drag .e-list-text, .e-bigger .treeview-external-drag.e-rtl .e-list-text {
+  border: 0.5px solid #E1E7EC;
+  height: 50px;
+  line-height: 15px !important;
+  padding: 0 5px;
+  width: 220px;
 }
 
-.custom-work-days.e-schedule.e-device .template-wrap .resource-details .resource-designation {
-    display: none;
+.treeview-external-drag .e-list-parent, .treeview-external-drag.e-rtl .e-list-parent, .e-bigger .treeview-external-drag .e-list-parent, .e-bigger .treeview-external-drag.e-rtl .e-list-parent {
+  height: 100%;
+  padding: 0 2px;
 }
 
-.custom-work-days.e-schedule .template-wrap .resource-image.will-smith {
-    background-image: url('');
+.treeview-external-drag .e-list-item, .e-bigger .treeview-external-drag .e-list-item {
+  height: 100%;
+  padding: 0 0 5px 0;
 }
 
-.custom-work-days.e-schedule .template-wrap .resource-image.alice {
-    background-image: url('');
+.treeview-external-drag .e-fullrow, .e-bigger .treeview-external-drag .e-fullrow {
+  height: 55px;
 }
 
-.custom-work-days.e-schedule .template-wrap .resource-image.robson {
-    background-image: url('');
+.treeview-external-drag .e-list-item.e-hover>.e-fullrow, .treeview-external-drag .e-list-item.e-active>.e-fullrow, .treeview-external-drag .e-list-item.e-active.e-hover>.e-fullrow, .e-bigger .treeview-external-drag .e-list-item.e-hover>.e-fullrow, .e-bigger .treeview-external-drag .e-list-item.e-active>.e-fullrow, .e-bigger .treeview-external-drag .e-list-item.e-active.e-hover>.e-fullrow {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none !important;
+}
+.fluent2-highcontrast .treeview-external-drag .e-list-item.e-hover>.e-text-content .e-list-text {
+  color: #fff;
+}
+.treeview-external-drag .e-text-content, .e-bigger .treeview-external-drag .e-text-content, .treeview-external-drag.e-rtl .e-text-content, .e-bigger .treeview-external-drag.e-rtl .e-text-content {
+  padding: 0;
+  background-color: inherit;
 }
 
-.schedule-control-section {
-    padding: 20px;
+.e-drag-item.e-treeview.treeview-external-drag, .e-bigger .e-drag-item.e-treeview.treeview-external-drag {
+  padding: 0 !important;
+}
+
+.e-schedule.schedule-drag-drop .e-timeline-view .e-resource-left-td, .e-schedule.schedule-drag-drop .e-timeline-month-view .e-resource-left-td {
+  width: 160px;
+}
+
+.e-schedule.schedule-drag-drop .e-resource-cells.e-parent-node .specialist-category {
+  padding-left: 30px
+}
+
+.e-schedule.e-rtl.schedule-drag-drop .e-resource-cells.e-parent-node .specialist-category {
+  padding-right: 30px
+}
+
+.e-schedule.schedule-drag-drop .e-resource-cells.e-child-node .specialist-category, .e-schedule.schedule-drag-drop .e-resource-cells.e-child-node .specialist-name {
+  padding: 5px
+}
+
+.e-schedule.schedule-drag-drop .e-resource-cells.e-parent-node .specialist-name {
+  padding: 0 10px
+}
+
+.e-schedule.schedule-drag-drop .e-resource-cells .specialist-name {
+  font-size: 13px;
+}
+
+.e-schedule.schedule-drag-drop .e-resource-cells .specialist-designation {
+  font-size: 10px;
+}
+
+.e-schedule.schedule-drag-drop .specialist-image {
+  width: 45px;
+  height: 40px;
+  float: left;
+  border-radius: 50%;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: 45px;
+}
+
+.e-device-hover {
+  background-color: #e0e0e0 !important;
+}
+
+.e-schedule.schedule-drag-drop .e-resource-cells.e-parent-node .specialist-image {
+  display: none;
+}
+
+.schedule-drag-drop.e-schedule .template-wrap .specialist-image.alice {
+  background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/alice.png');
+}
+
+.schedule-drag-drop.e-schedule .template-wrap .specialist-image.robert {
+  background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/robert.png');
+}
+
+.schedule-drag-drop.e-schedule .template-wrap .specialist-image.robson {
+  background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/robson.png');
+}
+
+.schedule-drag-drop.e-schedule .template-wrap .specialist-image.laura {
+  background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/laura.png');
+}
+
+.schedule-drag-drop.e-schedule .template-wrap .specialist-image.nancy {
+  background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/nancy.png');
+}
+
+.schedule-drag-drop.e-schedule .template-wrap .specialist-image.margaret {
+  background-image: url('https://ej2.syncfusion.com/react/demos/src/schedule/images/margaret.png');
+}
+
+@media (max-width: 550px) {
+  .drag-sample-wrapper {
+      display: block;
   }
-  
-  .control-wrapper {
-    display: flex;
-    justify-content: space-between;
-  }
-  
   .schedule-container {
-    width: 100%; /* Increase width to 80% */
+      padding-bottom: 10px
   }
-  
-  .treeview-container {
-    
-    /* background-color: #f5f5f5; */
-    /* padding: 20px; */
+  .treeview-external-drag.e-treeview, .e-bigger .treeview-external-drag.e-treeview {
+      width: 250px;
   }
-  
-  
-  .title-container {
-    text-align: center;
+  .e-bigger .treeview-external-drag.e-treeview.e-drag-item {
+      position: relative !important;
   }
-  
-  .title-text {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .template-wrap {
-    display: flex;
-    align-items: center;
-    text-align: left;
-  }
-  
-  .resource-image {
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-  }
-  
-  .resource-details {
-    padding-left: 10px;
-  }
-  
-  .resource-name {
-    font-size: 12px;
-    font-weight: 500;
-    margin-top: 5px;
-  }
-  
-  .resource-designation {
-    font-size: 14px;
-    color: gray;
-  }
-  
+}
+.e-disble-not-allowed {
+ cursor: unset !important;
+}
 
-  .status-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: white;
-  }
-  
-  .status-available {
-    width: 180px;
-    background-color: #28a745;
-  }
-  
-  .status-not-available {
-    width: 180px;
-    background-color: #dc3545;
-  }
-  
-  .status-on-leave {
-    width: 180px;
-    background-color: #ffc107;
-  }
-  
-  .status-sick-leave {
-    width: 180px;
-    background-color: #17a2b8;
-  }
-  
+.e-drag-item.treeview-external-drag .e-icon-expandable {
+ display: none;
+}
