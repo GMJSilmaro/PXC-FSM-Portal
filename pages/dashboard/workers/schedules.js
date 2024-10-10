@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import {
   ScheduleComponent,
+  Day, // Add Day module here
   ResourcesDirective,
   ResourceDirective,
   ViewsDirective,
@@ -10,8 +11,7 @@ import {
   TimelineMonth,
   TimelineViews,
   Resize,
-  DragAndDrop,
-  CellClickEventArgs,
+  DragAndDrop
 } from '@syncfusion/ej2-react-schedule';
 import styles from './schedules.module.css';
 import { getFirestore, collection, getDocs, setDoc, doc } from 'firebase/firestore'; 
@@ -30,9 +30,9 @@ const ExternalDragDrop = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const db = getFirestore();
-      const usersCollection = collection(db, 'users'); 
+      const usersCollection = collection(db, 'users');
       const usersSnapshot = await getDocs(usersCollection);
-      const usersList = usersSnapshot.docs.map((doc) => ({
+      const usersList = usersSnapshot.docs.map(doc => ({
         WorkerId: doc.id,
         Name: `${doc.data().firstName} ${doc.data().lastName}`,
         Color: '#1aaa55',
@@ -41,16 +41,12 @@ const ExternalDragDrop = () => {
       }));
       setUsers(usersList);
     };
-    fetchUsers();
-  }, []);
 
-  // Statuses as draggable items
-  const statusList = [
-    { Id: '1', Name: 'Available', Color: '#28a745' },
-    { Id: '2', Name: 'Not Available', Color: '#dc3545' },
-    { Id: '3', Name: 'On Leave', Color: '#ffc107' },
-    { Id: '4', Name: 'Sick Leave', Color: '#17a2b8' },
-  ];
+    // Only fetch users if the array is empty
+    if (users.length === 0) {
+      fetchUsers();
+    }
+  }, [users]);
 
   // Event Saving Logic: Save event to Firestore with documentId as WS-{WorkerId}
   const saveEventInFirebase = async (eventData) => {
@@ -74,13 +70,13 @@ const ExternalDragDrop = () => {
       args.cancel = false;
       // Populate the color based on status selection
       const status = args.data.Name;
-      const selectedStatus = statusList.find((item) => item.Name === status);
+      const selectedStatus = statusList.find(item => item.Name === status);
       args.data.Color = selectedStatus ? selectedStatus.Color : '#ffffff';
     }
   };
 
   const onEventSave = async (args) => {
-    const workerId = args.data.WorkerId || args.data.ConsultantID || args.resource.Id; // Attempt to retrieve WorkerId from multiple sources
+    const workerId = args.data.WorkerId || args.data.ConsultantID || args.resource.Id;
 
     if (!workerId) {
       console.error('WorkerId is missing!');
@@ -88,13 +84,13 @@ const ExternalDragDrop = () => {
     }
 
     const eventData = {
-      WorkerId: workerId, // Store WorkerId
-      Name: args.data.Name || 'No Title', // Default title if none is provided
+      WorkerId: workerId,
+      Name: args.data.Name || 'No Title',
       StartTime: args.data.StartTime,
       EndTime: args.data.EndTime,
       IsAllDay: args.data.IsAllDay || false,
       Description: args.data.Description || '',
-      Color: args.data.Color || '#ffffff', // Default color if none selected
+      Color: args.data.Color || '#ffffff',
     };
 
     // Save event to Firebase
@@ -103,24 +99,22 @@ const ExternalDragDrop = () => {
 
   // Handle external drag-and-drop saving logic
   const onDragStop = async (args) => {
-    const { data } = args; // The data being dragged
+    const { data } = args;
 
-    // Ensure the data contains necessary fields like WorkerId, Name, StartTime, and EndTime
-    const workerId = data.WorkerId || data.resource.Id; // Attempt to retrieve WorkerId
-
+    const workerId = data.WorkerId || data.resource.Id;
     if (!workerId) {
       console.error('WorkerId is missing during drag and drop!');
       return;
     }
 
     const eventData = {
-      WorkerId: workerId, // Store WorkerId
-      Name: data.Name || 'No Title', // Default title if none is provided
+      WorkerId: workerId,
+      Name: data.Name || 'No Title',
       StartTime: data.StartTime,
       EndTime: data.EndTime,
       IsAllDay: data.IsAllDay || false,
       Description: data.Description || '',
-      Color: data.Color || '#ffffff', // Default color if none selected
+      Color: data.Color || '#ffffff',
     };
 
     // Save event to Firebase
@@ -132,7 +126,7 @@ const ExternalDragDrop = () => {
   // Color event rendering
   const onEventRendered = (args) => {
     if (args.data.Color) {
-      args.element.style.backgroundColor = args.data.Color; // Apply status color
+      args.element.style.backgroundColor = args.data.Color;
     }
   };
 
@@ -142,7 +136,7 @@ const ExternalDragDrop = () => {
         <div className={styles['control-wrapper']}>
           <div className={styles['schedule-container']}>
             <div className={styles['title-container']}>
-            <h1 className={styles['title-text']}>Worker&apos;s Schedules</h1>
+              <h1 className={styles['title-text']}>Worker&apos;s Schedules</h1>
             </div>
             {/* Syncfusion Scheduler */}
             <ScheduleComponent
@@ -152,31 +146,31 @@ const ExternalDragDrop = () => {
               selectedDate={new Date()}
               currentView="TimelineDay"
               eventSettings={{
-                dataSource: events, // Bind the events state to the Scheduler
+                dataSource: events,
                 fields: {
                   subject: { title: 'Status', name: 'Name' },
                   startTime: { title: 'From', name: 'StartTime' },
                   endTime: { title: 'To', name: 'EndTime' },
                   description: { title: 'Description', name: 'Description' },
-                  resourceId: { field: 'WorkerId' }, // Ensure WorkerId is properly assigned here
+                  resourceId: { field: 'WorkerId' },
                 },
               }}
-              group={{ enableCompactView: false, resources: ['Workers'] }} // Ensure the grouping is done by 'Workers'
+              group={{ enableCompactView: false, resources: ['Workers'] }}
               allowDragAndDrop={true}
-              dragStop={onDragStop} // Bind the custom drag-stop handler here
+              dragStop={onDragStop}
               popupOpen={onPopupOpen}
               eventRendered={onEventRendered}
             />
 
             <ResourcesDirective>
               <ResourceDirective
-                field="WorkerId" // Ensure the field is WorkerId
+                field="WorkerId"
                 title="Worker"
-                name="Workers" // You can change this to 'Consultants' if needed
+                name="Workers"
                 allowMultiple={false}
-                dataSource={users} // Data source from Firestore users
+                dataSource={users}
                 textField="Name"
-                idField="WorkerId" // Use WorkerId field, which is unique for each user (worker)
+                idField="WorkerId"
                 colorField="Color"
               />
             </ResourcesDirective>
@@ -184,8 +178,9 @@ const ExternalDragDrop = () => {
             <ViewsDirective>
               <ViewDirective option="TimelineDay" />
               <ViewDirective option="TimelineMonth" />
+              <ViewDirective option="Day" /> 
             </ViewsDirective>
-            <Inject services={[TimelineViews, TimelineMonth, Resize, DragAndDrop]} />
+            <Inject services={[Day, TimelineViews, TimelineMonth, Resize, DragAndDrop]} />
           </div>
         </div>
       </div>
