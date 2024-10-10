@@ -142,7 +142,7 @@ const ExternalDragDrop = () => {
         <div className={styles['control-wrapper']}>
           <div className={styles['schedule-container']}>
             <div className={styles['title-container']}>
-              <h1 className={styles['title-text']}>Worker's Schedules</h1>
+            <h1 className={styles['title-text']}>Worker&apos;s Schedules</h1>
             </div>
             {/* Syncfusion Scheduler */}
             <ScheduleComponent

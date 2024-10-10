@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, ListGroup, Breadcrumb } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { FaCog, FaUser, FaTools, FaClipboardList } from 'react-icons/fa';
+import Image from 'next/image'; // Import Image component
 
 const Settings = () => {
   const router = useRouter();
@@ -26,7 +27,14 @@ const Settings = () => {
               <h5>Company Information</h5>
               <Row>
                 <Col xs={4} className="fw-bold">Logo:</Col>
-                <Col xs={8}><img src="/images/SAS-LOGO.png" height={150} width={200} alt="Company Logo" /></Col>
+                <Col xs={8}>
+                  <Image 
+                    src="/images/SAS-LOGO.png" 
+                    alt="Company Logo" 
+                    width={200} 
+                    height={150} 
+                  />
+                </Col>
               </Row>
               <Row>
                 <Col xs={4} className="fw-bold">Company Name:</Col>
@@ -46,7 +54,11 @@ const Settings = () => {
               </Row>
               <Row>
                 <Col xs={4} className="fw-bold">Website:</Col>
-                <Col xs={8}><a href="https://www.sasairconditioning.com" target="_blank" rel="noreferrer">www.sasairconditioning.com</a></Col>
+                <Col xs={8}>
+                  <a href="https://www.sasairconditioning.com" target="_blank" rel="noreferrer">
+                    www.sasairconditioning.com
+                  </a>
+                </Col>
               </Row>
             </Card.Body>
           </Card>
@@ -54,64 +66,63 @@ const Settings = () => {
       case 'options':
         return (
           <Card className="shadow-sm">
-          <Card.Body>
-            <h5>Options</h5>
-            <p className="text-muted">Manage your company information, preferences, and various settings</p>
-            
-            <h6>General</h6>
-            <ListGroup variant="flush">
-              <ListGroup.Item action onClick={() => handleMenuClick('general/company-info')}>
-                <i data-feather="info"></i> Company Information
-                <p className="text-muted small mb-0">View and edit your company's information</p>
-              </ListGroup.Item>
-              <ListGroup.Item action onClick={() => handleMenuClick('general/company-preferences')}>
-                <i data-feather="settings"></i> Company Preferences
-                <p className="text-muted small mb-0">Set general company preferences</p>
-              </ListGroup.Item>
-              <ListGroup.Item action onClick={() => handleMenuClick('general/field-worker-app-settings')}>
-                <i data-feather="smartphone"></i> Field Worker App Settings
-                <p className="text-muted small mb-0">Configure settings for field worker applications</p>
-              </ListGroup.Item>
-            </ListGroup>
-        
-            <h6 className="mt-4">Access Management</h6>
-            <ListGroup variant="flush">
-              <ListGroup.Item action onClick={() => handleMenuClick('access-management/login-history')}>
-                <i data-feather="lock"></i> Login History
-                <p className="text-muted small mb-0">Track and review login activity</p>
-              </ListGroup.Item>
-            </ListGroup>
-        
-            <h6 className="mt-4">List Management</h6>
-            <ListGroup variant="flush">
-              <ListGroup.Item action onClick={() => handleMenuClick('list-management/job-categories')}>
-                <i data-feather="briefcase"></i> Job Categories
-                <p className="text-muted small mb-0">Manage different job categories</p>
-              </ListGroup.Item>
-              <ListGroup.Item action onClick={() => handleMenuClick('list-management/product-service-categories')}>
-                <i data-feather="box"></i> Product/Service Categories
-                <p className="text-muted small mb-0">Categorize products and services</p>
-              </ListGroup.Item>
-              <ListGroup.Item action onClick={() => handleMenuClick('list-management/warehouse-management')}>
-                <i data-feather="truck"></i> Warehouse Management
-                <p className="text-muted small mb-0">Oversee warehouse operations</p>
-              </ListGroup.Item>
-              <ListGroup.Item action onClick={() => handleMenuClick('list-management/equipment-manufacturers')}>
-                <i data-feather="tool"></i> Equipment Manufacturers
-                <p className="text-muted small mb-0">List and manage equipment manufacturers</p>
-              </ListGroup.Item>
-              <ListGroup.Item action onClick={() => handleMenuClick('list-management/equipment-types')}>
-                <i data-feather="tag"></i> Equipment Types
-                <p className="text-muted small mb-0">Define different types of equipment</p>
-              </ListGroup.Item>
-              <ListGroup.Item action onClick={() => handleMenuClick('list-management/equipment-models')}>
-                <i data-feather="cpu"></i> Equipment Models
-                <p className="text-muted small mb-0">Maintain a list of equipment models</p>
-              </ListGroup.Item>
-            </ListGroup>
-          </Card.Body>
-        </Card>
-        
+            <Card.Body>
+              <h5>Options</h5>
+              <p className="text-muted">Manage your company information, preferences, and various settings</p>
+              
+              <h6>General</h6>
+              <ListGroup variant="flush">
+                <ListGroup.Item action onClick={() => handleMenuClick('general/company-info')}>
+                  <i data-feather="info"></i> Company Information
+                  <p className="text-muted small mb-0">View and edit your company&apos;s information</p>
+                </ListGroup.Item>
+                <ListGroup.Item action onClick={() => handleMenuClick('general/company-preferences')}>
+                  <i data-feather="settings"></i> Company Preferences
+                  <p className="text-muted small mb-0">Set general company preferences</p>
+                </ListGroup.Item>
+                <ListGroup.Item action onClick={() => handleMenuClick('general/field-worker-app-settings')}>
+                  <i data-feather="smartphone"></i> Field Worker App Settings
+                  <p className="text-muted small mb-0">Configure settings for field worker applications</p>
+                </ListGroup.Item>
+              </ListGroup>
+          
+              <h6 className="mt-4">Access Management</h6>
+              <ListGroup variant="flush">
+                <ListGroup.Item action onClick={() => handleMenuClick('access-management/login-history')}>
+                  <i data-feather="lock"></i> Login History
+                  <p className="text-muted small mb-0">Track and review login activity</p>
+                </ListGroup.Item>
+              </ListGroup>
+          
+              <h6 className="mt-4">List Management</h6>
+              <ListGroup variant="flush">
+                <ListGroup.Item action onClick={() => handleMenuClick('list-management/job-categories')}>
+                  <i data-feather="briefcase"></i> Job Categories
+                  <p className="text-muted small mb-0">Manage different job categories</p>
+                </ListGroup.Item>
+                <ListGroup.Item action onClick={() => handleMenuClick('list-management/product-service-categories')}>
+                  <i data-feather="box"></i> Product/Service Categories
+                  <p className="text-muted small mb-0">Categorize products and services</p>
+                </ListGroup.Item>
+                <ListGroup.Item action onClick={() => handleMenuClick('list-management/warehouse-management')}>
+                  <i data-feather="truck"></i> Warehouse Management
+                  <p className="text-muted small mb-0">Oversee warehouse operations</p>
+                </ListGroup.Item>
+                <ListGroup.Item action onClick={() => handleMenuClick('list-management/equipment-manufacturers')}>
+                  <i data-feather="tool"></i> Equipment Manufacturers
+                  <p className="text-muted small mb-0">List and manage equipment manufacturers</p>
+                </ListGroup.Item>
+                <ListGroup.Item action onClick={() => handleMenuClick('list-management/equipment-types')}>
+                  <i data-feather="tag"></i> Equipment Types
+                  <p className="text-muted small mb-0">Define different types of equipment</p>
+                </ListGroup.Item>
+                <ListGroup.Item action onClick={() => handleMenuClick('list-management/equipment-models')}>
+                  <i data-feather="cpu"></i> Equipment Models
+                  <p className="text-muted small mb-0">Maintain a list of equipment models</p>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card.Body>
+          </Card>
         );
       case 'users':
         return (
