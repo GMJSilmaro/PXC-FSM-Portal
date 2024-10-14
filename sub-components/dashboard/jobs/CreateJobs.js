@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Container,
@@ -26,18 +25,17 @@ import {
 } from "firebase/firestore";
 import Swal from "sweetalert2";
 import styles from "./CreateJobs.module.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import JobTask from "./tabs/JobTasklist";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const AddNewJobs = () => {
   const router = useRouter();
   const timestamp = Timestamp.now();
-  
+
   const [workers, setWorkers] = useState([]);
   const [selectedWorkers, setSelectedWorkers] = useState([]);
-  const [tasks, setTasks] = useState([]);  // Initialize tasks
-
+  const [tasks, setTasks] = useState([]); // Initialize tasks
 
   const [customers, setCustomers] = useState([]);
   const [contacts, setContacts] = useState([]);
@@ -78,7 +76,6 @@ const AddNewJobs = () => {
     adminWorkerNotify: false,
     customerNotify: false,
   });
-  
 
   const [showServiceLocation, setShowServiceLocation] = useState(true);
   const [showEquipments, setShowEquipments] = useState(true);
@@ -88,14 +85,14 @@ const AddNewJobs = () => {
 
   const logActivity = async (activity, activitybrief) => {
     try {
-      await addDoc(collection(db, 'recentActivities'), {
+      await addDoc(collection(db, "recentActivities"), {
         activity,
         activitybrief,
         time: Timestamp.now(),
-        icon: 'check',
+        icon: "check",
       });
     } catch (error) {
-      console.error('Error logging activity:', error);
+      console.error("Error logging activity:", error);
     }
   };
 
@@ -180,13 +177,13 @@ const AddNewJobs = () => {
     fetchLastJobNo();
   }, []);
 
-   // Task Management Functions
-   const addTask = () => {
+  // Task Management Functions
+  const addTask = () => {
     setTasks((prevTasks) => [
       ...prevTasks,
       {
-        taskName: '',
-        taskDescription: '',
+        taskName: "",
+        taskDescription: "",
         isComplete: false,
         isPriority: false,
       },
@@ -366,37 +363,37 @@ const AddNewJobs = () => {
       setActiveKey("scheduling");
     }
   };
-  
+
   const handleScheduleSessionChange = (e) => {
     const { name, value } = e.target;
     let updatedFormData = { ...formData, [name]: value };
-  
-    if (value === 'morning') {
+
+    if (value === "morning") {
       updatedFormData = {
         ...updatedFormData,
-        startTime: '09:30',
-        endTime: '13:00',
+        startTime: "09:30",
+        endTime: "13:00",
         estimatedDurationHours: 3,
         estimatedDurationMinutes: 30,
       };
-    } else if (value === 'afternoon') {
+    } else if (value === "afternoon") {
       updatedFormData = {
         ...updatedFormData,
-        startTime: '13:00',
-        endTime: '17:30',
+        startTime: "13:00",
+        endTime: "17:30",
         estimatedDurationHours: 4,
         estimatedDurationMinutes: 30,
       };
     } else {
       updatedFormData = {
         ...updatedFormData,
-        startTime: '',
-        endTime: '',
-        estimatedDurationHours: '',
-        estimatedDurationMinutes: '',
+        startTime: "",
+        endTime: "",
+        estimatedDurationHours: "",
+        estimatedDurationMinutes: "",
       };
     }
-  
+
     setFormData(updatedFormData);
   };
 
@@ -406,9 +403,6 @@ const AddNewJobs = () => {
       ...prevState,
       [name]: type === "checkbox" ? checked : value,
     }));
-
- 
-    
 
     // SENT API THRU SAP
   };
@@ -491,7 +485,7 @@ const AddNewJobs = () => {
         formData.estimatedDurationHours,
         formData.estimatedDurationMinutes
       );
-  
+
       const newJobData = {
         ...formData,
         start: formattedStartDateTime,
@@ -500,19 +494,19 @@ const AddNewJobs = () => {
         TaskList: tasks,
         assignedWorkers: selectedWorkers.map((worker) => worker.value),
       };
-  
+
       const jobRef = doc(db, "jobs", jobNo);
       await setDoc(jobRef, newJobData);
-  
+
       // Show success toast
       toast.success("Job created successfully!");
-  
+
       // Log the activity
       await logActivity(
         "Job Created",
         `Job ${formData.jobName} (Job No: ${jobNo}) was created.`
       );
-  
+
       // Show success SweetAlert
       Swal.fire({
         title: "Success!",
@@ -521,8 +515,8 @@ const AddNewJobs = () => {
       });
 
       // Redirect after the user clicks OK
-      router.replace('/dashboard/workers/create-jobs');
-  
+      router.replace("/dashboard/jobs/list-jobs");
+
       // Increment jobNo for the UI
       setJobNo((prevJobNo) =>
         (parseInt(prevJobNo, 10) + 1).toString().padStart(6, "0")
@@ -530,7 +524,7 @@ const AddNewJobs = () => {
     } catch (e) {
       console.error("Error adding document: ", e);
       toast.error("An error occurred while saving data.");
-  
+
       Swal.fire({
         title: "Error!",
         text: "An error occurred while saving data.",
@@ -538,7 +532,7 @@ const AddNewJobs = () => {
       });
     }
   };
-  
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -818,14 +812,14 @@ const AddNewJobs = () => {
         </Row>
       </Tab>
       <Tab eventKey="task" title="Job Task">
-        <JobTask 
-          tasks={tasks} 
+        <JobTask
+          tasks={tasks}
           addTask={addTask}
           handleTaskChange={handleTaskChange}
           handleCheckboxChange={handleCheckboxChange}
           deleteTask={deleteTask}
         />
-          <Row className="align-items-center">
+        <Row className="align-items-center">
           <Col md={{ span: 4, offset: 8 }} xs={12} className="mt-1">
             <Button
               variant="primary"
@@ -946,66 +940,65 @@ const AddNewJobs = () => {
               />
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="scheduleSession">
-    <Form.Label>Schedule Session</Form.Label>
-    <Form.Select
-      name="scheduleSession"
-      value={formData.scheduleSession}
-      onChange={handleScheduleSessionChange}
-      aria-label="Select schedule session"
-    >
-      <option value="custom">Custom</option>
-      <option value="morning">Morning (9:30am to 1:00pm)</option>
-      <option value="afternoon">Afternoon (1:00pm to 5:30pm)</option>
-    </Form.Select>
-  </Form.Group>
-
+              <Form.Label>Schedule Session</Form.Label>
+              <Form.Select
+                name="scheduleSession"
+                value={formData.scheduleSession}
+                onChange={handleScheduleSessionChange}
+                aria-label="Select schedule session"
+              >
+                <option value="custom">Custom</option>
+                <option value="morning">Morning (9:30am to 1:00pm)</option>
+                <option value="afternoon">Afternoon (1:00pm to 5:30pm)</option>
+              </Form.Select>
+            </Form.Group>
           </Row>
           <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="startTime">
-    <Form.Label>Start Time</Form.Label>
-    <Form.Control
-      type="time"
-      name="startTime"
-      value={formData.startTime}
-      onChange={handleInputChange}
-      readOnly={formData.scheduleSession !== 'custom'}
-    />
-  </Form.Group>
+            <Form.Group as={Col} md="4" controlId="startTime">
+              <Form.Label>Start Time</Form.Label>
+              <Form.Control
+                type="time"
+                name="startTime"
+                value={formData.startTime}
+                onChange={handleInputChange}
+                readOnly={formData.scheduleSession !== "custom"}
+              />
+            </Form.Group>
 
-  <Form.Group as={Col} md="4" controlId="endTime">
-    <Form.Label>End Time</Form.Label>
-    <Form.Control
-      type="time"
-      name="endTime"
-      value={formData.endTime}
-      onChange={handleInputChange}
-      readOnly={formData.scheduleSession !== 'custom'}
-    />
-  </Form.Group>
+            <Form.Group as={Col} md="4" controlId="endTime">
+              <Form.Label>End Time</Form.Label>
+              <Form.Control
+                type="time"
+                name="endTime"
+                value={formData.endTime}
+                onChange={handleInputChange}
+                readOnly={formData.scheduleSession !== "custom"}
+              />
+            </Form.Group>
 
-  <Form.Group as={Col} md="3" controlId="estimatedDuration">
-    <Form.Label>Estimated Duration</Form.Label>
-    <InputGroup>
-      <Form.Control
-        type="number"
-        name="estimatedDurationHours"
-        value={formData.estimatedDurationHours}
-        onChange={handleInputChange}
-        placeholder="Hours"
-        readOnly={formData.scheduleSession !== 'custom'}
-      />
-      <InputGroup.Text>h</InputGroup.Text>
-      <Form.Control
-        type="number"
-        name="estimatedDurationMinutes"
-        value={formData.estimatedDurationMinutes}
-        onChange={handleInputChange}
-        placeholder="Minutes"
-        readOnly={formData.scheduleSession !== 'custom'}
-      />
-      <InputGroup.Text>m</InputGroup.Text>
-    </InputGroup>
-  </Form.Group>
+            <Form.Group as={Col} md="3" controlId="estimatedDuration">
+              <Form.Label>Estimated Duration</Form.Label>
+              <InputGroup>
+                <Form.Control
+                  type="number"
+                  name="estimatedDurationHours"
+                  value={formData.estimatedDurationHours}
+                  onChange={handleInputChange}
+                  placeholder="Hours"
+                  readOnly={formData.scheduleSession !== "custom"}
+                />
+                <InputGroup.Text>h</InputGroup.Text>
+                <Form.Control
+                  type="number"
+                  name="estimatedDurationMinutes"
+                  value={formData.estimatedDurationMinutes}
+                  onChange={handleInputChange}
+                  placeholder="Minutes"
+                  readOnly={formData.scheduleSession !== "custom"}
+                />
+                <InputGroup.Text>m</InputGroup.Text>
+              </InputGroup>
+            </Form.Group>
           </Row>
           <hr className="my-4" />
           {/* <p className="text-muted">Notification:</p>
@@ -1043,7 +1036,6 @@ const AddNewJobs = () => {
           </Row>
         </Form>
       </Tab>
-      
     </Tabs>
   );
 };

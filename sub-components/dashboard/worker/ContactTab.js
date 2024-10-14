@@ -1,18 +1,34 @@
-import React, { useState } from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { Row, Col, Form, Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 
-export const ContactTab = ({ onSubmit }) => {
-  const [primaryPhone, setPrimaryPhone] = useState('');
-  const [secondaryPhone, setSecondaryPhone] = useState('');
+export const ContactTab = ({ onSubmit, initialValues }) => {
+  const [primaryPhone, setPrimaryPhone] = useState("");
+  const [secondaryPhone, setSecondaryPhone] = useState("");
   const [activePhone1, setActive1] = useState(false);
   const [activePhone2, setActive2] = useState(false);
-  const [streetAddress, setStreetAddress] = useState('');
-  const [stateProvince, setStateProvince] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [emergencyContactName, setEmergencyContactName] = useState('');
-  const [emergencyContactPhone, setEmergencyContactPhone] = useState('');
-  const [emergencyRelationship, setEmergencyRelationship] = useState('');
+  const [streetAddress, setStreetAddress] = useState("");
+  const [stateProvince, setStateProvince] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [emergencyContactName, setEmergencyContactName] = useState("");
+  const [emergencyContactPhone, setEmergencyContactPhone] = useState("");
+  const [emergencyRelationship, setEmergencyRelationship] = useState("");
+
+  useEffect(() => {
+    // Populate form fields with initial values if provided
+    if (initialValues) {
+      setPrimaryPhone(initialValues.primaryPhone || "");
+      setSecondaryPhone(initialValues.secondaryPhone || "");
+      setActive1(initialValues.activePhone1 || false);
+      setActive2(initialValues.activePhone2 || false);
+      setStreetAddress(initialValues.streetAddress || "");
+      setStateProvince(initialValues.stateProvince || "");
+      setZipCode(initialValues.zipCode || "");
+      setEmergencyContactName(initialValues.emergencyContactName || "");
+      setEmergencyContactPhone(initialValues.emergencyContactPhone || "");
+      setEmergencyRelationship(initialValues.emergencyRelationship || "");
+    }
+  }, [initialValues]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,11 +46,18 @@ export const ContactTab = ({ onSubmit }) => {
     };
 
     // Log the data for debugging
-    console.log("Contact Form Data:", formData); 
+    console.log("Contact Form Data:", formData);
 
     // Check if required fields are filled
-    if (!primaryPhone || !streetAddress || !emergencyContactName || !emergencyContactPhone || !stateProvince || !zipCode) {
-      toast.error('Please fill in all required contact fields.');
+    if (
+      !primaryPhone ||
+      !streetAddress ||
+      !emergencyContactName ||
+      !emergencyContactPhone ||
+      !stateProvince ||
+      !zipCode
+    ) {
+      toast.error("Please fill in all required contact fields.");
       return;
     }
 
@@ -160,13 +183,14 @@ export const ContactTab = ({ onSubmit }) => {
         </Form.Group>
       </Row>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant="primary" type="submit">Next</Button>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button variant="primary" type="submit">
+          Next
+        </Button>
       </div>
     </Form>
   );
 };
-
 
 // import React, { useState } from 'react';
 // import { Row, Col, Form, Button } from 'react-bootstrap';
@@ -335,8 +359,6 @@ export const ContactTab = ({ onSubmit }) => {
 //   );
 // };
 
-
-
 // // import React, { useState } from 'react';
 // // import { Row, Col, Form, Button } from 'react-bootstrap';
 
@@ -415,24 +437,24 @@ export const ContactTab = ({ onSubmit }) => {
 // //    <Row className="mb-3">
 // //     <Form.Group as={Col} controlId="formGridStreetAddress">
 // //       <Form.Label>Street Address</Form.Label>
-// //       <Form.Control 
-// //       type="text" 
+// //       <Form.Control
+// //       type="text"
 // //       placeholder="Enter Street Address"
 // //       value={streetAddress} onChange={(e) => setStreetAddress(e.target.value)} />
 // //     </Form.Group>
-    
+
 // //     <Form.Group as={Col} controlId="formGridStateProvince">
 // //       <Form.Label>State / Province</Form.Label>
-// //       <Form.Control 
-// //       type="text" 
+// //       <Form.Control
+// //       type="text"
 // //       placeholder="Enter State / Province"
 // //       value={stateProvince} onChange={(e) => setStateProvince(e.target.value)} />
 // //     </Form.Group>
 
 // //     <Form.Group as={Col} controlId="formGridZipPostal">
 // //       <Form.Label>Postal Code</Form.Label>
-// //       <Form.Control 
-// //       type="text" 
+// //       <Form.Control
+// //       type="text"
 // //       placeholder="Enter Zip Code / Postal Code"
 // //       value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
 // //     </Form.Group>
@@ -441,17 +463,17 @@ export const ContactTab = ({ onSubmit }) => {
 // //   <Row className="mb-3">
 // //     <Form.Group as={Col} controlId="formGridEmergencyName">
 // //       <Form.Label>Emergency Contact Name</Form.Label>
-// //       <Form.Control 
-// //       type="text" 
+// //       <Form.Control
+// //       type="text"
 // //       placeholder="Enter Emergency Contact Name"
 // //       value={emergencyContactName} onChange={(e) => setEmergencyContactName(e.target.value)} />
 // //     </Form.Group>
-    
+
 // //     <Form.Group as={Col} controlId="formGridEmergencyContact">
 // //       <Form.Label>Emergency Contact Phone</Form.Label>
-// //       <Form.Control 
-// //       type="text" 
-// //       placeholder="Enter Emergency Contact" 
+// //       <Form.Control
+// //       type="text"
+// //       placeholder="Enter Emergency Contact"
 // //       value={emergencyContactPhone} onChange={(e) => setEmergencyContactPhone(e.target.value)}/>
 // //     </Form.Group>
 
@@ -473,7 +495,6 @@ export const ContactTab = ({ onSubmit }) => {
 
 // //   </Row>
 
-  
 // //   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 // //       <Button variant="primary" type="submit">Next</Button>
 // //     </div>
@@ -544,7 +565,7 @@ export const ContactTab = ({ onSubmit }) => {
 // //     //       <Form.Label>Street Address</Form.Label>
 // //     //       <Form.Control type="text" placeholder="Enter Street Address" />
 // //     //     </Form.Group>
-        
+
 // //     //     <Form.Group as={Col} controlId="formGridMiddleName">
 // //     //       <Form.Label>State / Province</Form.Label>
 // //     //       <Form.Control type="text" placeholder="Enter State / Province" />
@@ -561,7 +582,7 @@ export const ContactTab = ({ onSubmit }) => {
 // //     //       <Form.Label>Emergency Contact Name</Form.Label>
 // //     //       <Form.Control type="text" placeholder="Enter Emergency Contact Name" />
 // //     //     </Form.Group>
-        
+
 // //     //     <Form.Group as={Col} controlId="formGridMiddleName">
 // //     //       <Form.Label>Emergency Contact Phone</Form.Label>
 // //     //       <Form.Control type="text" placeholder="Enter Emergency Contact" />
@@ -581,11 +602,10 @@ export const ContactTab = ({ onSubmit }) => {
 
 // //     //   </Row>
 
-      
 // //     //   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 // //     //       <Button variant="primary" type="submit">Next</Button>
 // //     //     </div>
-   
+
 // //     // </Form>
 // // //     </>
 // // //   )

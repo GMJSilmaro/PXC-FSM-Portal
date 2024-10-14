@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
-import { Row, FormGroup, InputGroup, FormControl, Button, FormLabel, Col, Form } from 'react-bootstrap';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import {
+  Row,
+  FormGroup,
+  InputGroup,
+  FormControl,
+  Button,
+  FormLabel,
+  Col,
+  Form,
+} from "react-bootstrap";
+import { toast } from "react-toastify";
 
-export const SkillsTab = ({ onSubmit }) => {
-  const [skills, setSkills] = useState(['']); // Initialize with one empty skill
+export const SkillsTab = ({ onSubmit, initialValues }) => {
+  const [skills, setSkills] = useState([""]); // Initialize with one empty skill
+
+  // Use useEffect to set initial values when the component mounts
+  useEffect(() => {
+    if (initialValues && initialValues.length > 0) {
+      setSkills(initialValues);
+    }
+  }, [initialValues]);
 
   const handleSkillChange = (index, event) => {
     const newSkills = [...skills];
@@ -12,7 +28,7 @@ export const SkillsTab = ({ onSubmit }) => {
   };
 
   const handleAddSkill = () => {
-    setSkills([...skills, '']);
+    setSkills([...skills, ""]);
   };
 
   const handleRemoveSkill = (index) => {
@@ -23,13 +39,13 @@ export const SkillsTab = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Filter out any empty skill entries
-    const filteredSkills = skills.filter(skill => skill.trim() !== '');
+    const filteredSkills = skills.filter((skill) => skill.trim() !== "");
 
     // Validation: Ensure at least one skill is provided
     if (filteredSkills.length === 0) {
-      toast.error('Please add at least 1 skill for this worker.');
+      toast.error("Please add at least 1 skill for this worker.");
       return;
     }
 
@@ -40,7 +56,9 @@ export const SkillsTab = ({ onSubmit }) => {
     <Form onSubmit={handleSubmit}>
       <Row className="mb-3">
         <FormGroup as={Row}>
-          <FormLabel column sm="3">Worker Skills</FormLabel>
+          <FormLabel column sm="3">
+            Worker Skills
+          </FormLabel>
           <Col sm="9">
             {skills.map((skill, index) => (
               <FormGroup key={index} className="mb-3">
@@ -67,7 +85,7 @@ export const SkillsTab = ({ onSubmit }) => {
           </Col>
         </FormGroup>
       </Row>
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Button variant="primary" type="submit">
           Submit
         </Button>
@@ -75,7 +93,6 @@ export const SkillsTab = ({ onSubmit }) => {
     </Form>
   );
 };
-
 
 // import React, { useState } from 'react';
 // import { Row, FormGroup, InputGroup, FormControl, Button, FormLabel, Col, Form } from 'react-bootstrap';
@@ -104,15 +121,14 @@ export const SkillsTab = ({ onSubmit }) => {
 //     e.preventDefault();
 //     if (skills.length === 0) {
 //       //console.error('Please add at least 1 skill for this worker.');
-      
+
 //       // Show error toast
 //       toast.error('Please add at least 1 skill for this worker.');
-  
+
 //       return;
 //     }
-//     onSubmit(skills); 
+//     onSubmit(skills);
 //   };
-  
 
 //   return (
 //     <Row className="mb-3">
@@ -154,8 +170,6 @@ export const SkillsTab = ({ onSubmit }) => {
 //   );
 // };
 
-
-
 // // import React, { useState } from 'react';
 // // import { Row, FormGroup, InputGroup, FormControl, Button, FormLabel, Col, Form } from 'react-bootstrap';
 
@@ -189,7 +203,7 @@ export const SkillsTab = ({ onSubmit }) => {
 // //     console.log(skills);
 // //     onSubmit(skills);
 // //   };
-  
+
 // //   return (
 // //     <Row className="mb-3">
 // //       <FormGroup as={Row} className="mb-3">
@@ -268,7 +282,7 @@ export const SkillsTab = ({ onSubmit }) => {
 // //   return (
 // //     <Row className="mb-3">
 // //         <Form.Label>Worker Skills</Form.Label>
-   
+
 // //     <Form>
 // //       {skills.map((skill, index) => (
 // //         <FormGroup key={index} className="mb-3">

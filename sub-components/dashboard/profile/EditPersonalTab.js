@@ -4,11 +4,11 @@ import { db, storage } from "../../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, getDocs } from "firebase/firestore";
 
-export const PersonalTab = ({ onSubmit, initialValues }) => {
+export const EditPersonalTab = ({ onSubmit, initialValues }) => {
   const [profilePicture, setProfilePicture] = useState(
     "/images/avatar/NoProfile.png"
   );
-  const [activeUser, setActiveUser] = useState(false);
+  //   const [activeUser, setActiveUser] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isFieldWorker, setIsFieldWorker] = useState(false);
   const [shortBio, setShortBio] = useState("");
@@ -20,7 +20,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
   const [email, setEmail] = useState("");
   const [workerId, setWorkerId] = useState("");
   const [password, setPassword] = useState("");
-  const [expirationDate, setExpirationDate] = useState("");
+  //const [expirationDate, setExpirationDate] = useState("");
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -30,7 +30,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
       setProfilePicture(
         initialValues.profilePicture || "/images/avatar/NoProfile.png"
       );
-      setActiveUser(initialValues.activeUser || false);
+      //setActiveUser(initialValues.activeUser || false);
       setIsAdmin(initialValues.isAdmin || false);
       setIsFieldWorker(initialValues.isFieldWorker || false);
       setShortBio(initialValues.shortBio || "");
@@ -42,7 +42,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
       setEmail(initialValues.email || "");
       setWorkerId(initialValues.workerId || "");
       setPassword(initialValues.password || "");
-      setExpirationDate(initialValues.expirationDate || "");
+      //setExpirationDate(initialValues.expirationDate || "");
     }
   }, [initialValues]); // Re-run this effect if initialValues changes
 
@@ -77,7 +77,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
 
     const formData = {
       profilePicture: profilePictureUrl,
-      activeUser,
+      //   activeUser,
       isAdmin,
       isFieldWorker,
       shortBio,
@@ -89,7 +89,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
       email,
       workerId,
       password,
-      expirationDate,
+      //   expirationDate,
     };
 
     console.log(formData);
@@ -144,7 +144,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
               </div>
             </div>
           </Col>
-          <Form.Group as={Col} controlId="formSwitchActive">
+          {/* <Form.Group as={Col} controlId="formSwitchActive">
             <Form.Label>Optional</Form.Label>
             <Form.Check
               type="switch"
@@ -167,7 +167,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
               checked={isFieldWorker}
               onChange={(e) => setIsFieldWorker(e.target.checked)}
             />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group as={Col} controlId="formShortBio">
             <Form.Label>Short Bio</Form.Label>
             <Form.Control
@@ -281,7 +281,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
               required
             />
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridExpDate">
+          {/* <Form.Group as={Col} controlId="formGridExpDate">
             <Form.Label>Expiration Date</Form.Label>
             <Form.Control
               type="date"
@@ -289,7 +289,7 @@ export const PersonalTab = ({ onSubmit, initialValues }) => {
               onChange={(e) => setExpirationDate(e.target.value)}
               required
             />
-          </Form.Group>
+          </Form.Group> */}
         </Row>
 
         <div style={{ display: "flex", justifyContent: "flex-end" }}>

@@ -1,35 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
-import Select from 'react-select';
-import EquipmentsTable from 'pages/dashboard/tables/datatable-equipments';
-import { db } from '../../../../firebase';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import React, { useState, useEffect } from "react";
+import { Row, Col, Form, Button } from "react-bootstrap";
+import Select from "react-select";
+import EquipmentsTable from "pages/dashboard/tables/datatable-equipments";
+import { db } from "../../../../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const JobSummary = ({
   jobId,
   showServiceLocation,
   showEquipments,
   toggleServiceLocation,
-  toggleEquipments
+  toggleEquipments,
+  setActiveTab,
 }) => {
   const [formData, setFormData] = useState({
-    customerName: '',
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    phoneNumber: '',
-    mobilePhone: '',
-    email: '',
-    locationName: '',
-    streetNo: '',
-    streetAddress: '',
-    block: '',
-    buildingNo: '',
-    country: '',
-    stateProvince: '',
-    city: '',
-    zipCode: '',
-    equipments: []
+    customerName: "",
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    phoneNumber: "",
+    mobilePhone: "",
+    email: "",
+    locationName: "",
+    streetNo: "",
+    streetAddress: "",
+    block: "",
+    buildingNo: "",
+    country: "",
+    stateProvince: "",
+    city: "",
+    zipCode: "",
+    equipments: [],
   });
 
   const [customers, setCustomers] = useState([]);
@@ -43,7 +44,7 @@ const JobSummary = ({
   useEffect(() => {
     const fetchJobData = async () => {
       try {
-        const jobRef = doc(db, 'jobs', jobId);
+        const jobRef = doc(db, "jobs", jobId);
         const jobSnap = await getDoc(jobRef);
 
         if (jobSnap.exists()) {
@@ -56,10 +57,10 @@ const JobSummary = ({
           );
           setSelectedCustomer(selectedCustomer);
         } else {
-          console.error('No such document!');
+          console.error("No such document!");
         }
       } catch (error) {
-        console.error('Error fetching job data:', error);
+        console.error("Error fetching job data:", error);
       }
     };
 
@@ -72,78 +73,76 @@ const JobSummary = ({
     if (selectedCustomer) {
       const fetchRelatedData = async () => {
         try {
-          const contactsResponse = await fetch('/api/getContacts', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cardCode: selectedCustomer.value })
+          const contactsResponse = await fetch("/api/getContacts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cardCode: selectedCustomer.value }),
           });
           const contactsData = await contactsResponse.json();
-          const formattedContacts = contactsData.map(item => ({
+          const formattedContacts = contactsData.map((item) => ({
             value: item.contactId,
             label: item.contactId,
-            ...item
+            ...item,
           }));
           setContacts(formattedContacts);
 
           // Log the contacts fetched
-          console.log('Contacts fetched:', formattedContacts);
+          console.log("Contacts fetched:", formattedContacts);
 
           // Set selected contact based on formData
           const selectedContact = formattedContacts.find(
-            contact => contact.label === formData.contactId
+            (contact) => contact.label === formData.contactId
           );
-          console.log('Selected contact:', selectedContact);
+          console.log("Selected contact:", selectedContact);
           setSelectedContact(selectedContact);
-
         } catch (error) {
-          console.error('Error fetching contacts:', error);
+          console.error("Error fetching contacts:", error);
           setContacts([]);
         }
 
         try {
-          const locationsResponse = await fetch('/api/getLocation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cardCode: selectedCustomer.value })
+          const locationsResponse = await fetch("/api/getLocation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cardCode: selectedCustomer.value }),
           });
           const locationsData = await locationsResponse.json();
-          const formattedLocations = locationsData.map(item => ({
+          const formattedLocations = locationsData.map((item) => ({
             value: item.siteId,
             label: item.siteId,
-            ...item
+            ...item,
           }));
           setLocations(formattedLocations);
 
           // Log the locations fetched
-          console.log('Locations fetched:', formattedLocations);
+          console.log("Locations fetched:", formattedLocations);
 
           // Set selected location based on formData
           const selectedLocation = formattedLocations.find(
-            location => location.label === formData.locationName
+            (location) => location.label === formData.locationName
           );
-          console.log('Selected location:', selectedLocation);
+          console.log("Selected location:", selectedLocation);
           setSelectedLocation(selectedLocation);
-
         } catch (error) {
-          console.error('Error fetching locations:', error);
+          console.error("Error fetching locations:", error);
           setLocations([]);
         }
 
         try {
-          const equipmentsResponse = await fetch('/api/getEquipments', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cardCode: selectedCustomer.value })
+          const equipmentsResponse = await fetch("/api/getEquipments", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cardCode: selectedCustomer.value }),
           });
           const equipmentsData = await equipmentsResponse.json();
-          const formattedEquipments = equipmentsData.map(item => ({
+          const formattedEquipments = equipmentsData.map((item) => ({
             value: item.ItemCode,
             label: item.ItemCode,
-            ...item
+            ...item,
           }));
           setEquipments(formattedEquipments);
         } catch (error) {
-          console.error('Error fetching equipments:', error);
+          console.error("Error fetching equipments:", error);
           setEquipments([]);
         }
       };
@@ -154,15 +153,15 @@ const JobSummary = ({
 
   const fetchCustomers = async () => {
     try {
-      const response = await fetch('/api/getCustomers');
+      const response = await fetch("/api/getCustomers");
       const data = await response.json();
-      const formattedOptions = data.map(item => ({
+      const formattedOptions = data.map((item) => ({
         value: item.cardCode,
-        label: item.cardCode + ' - ' + item.cardName
+        label: item.cardCode + " - " + item.cardName,
       }));
       setCustomers(formattedOptions);
     } catch (error) {
-      console.error('Error fetching customers:', error);
+      console.error("Error fetching customers:", error);
       setCustomers([]);
     }
   };
@@ -172,49 +171,73 @@ const JobSummary = ({
   }, []);
 
   const handleCustomerChange = (selectedOption) => {
+    // Reset contact, location, and formData related to the selected customer
     setSelectedContact(null);
     setSelectedLocation(null);
-    setSelectedCustomer(selectedOption);
-    setFormData(prevFormData => ({
+    setContacts([]); // Clear contacts
+    setLocations([]); // Clear locations
+    setEquipments([]); // Optionally clear equipments
+    setFormData((prevFormData) => ({
       ...prevFormData,
-      customerName: selectedOption ? selectedOption.label : ''
+      customerName: selectedOption ? selectedOption.label : "",
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      phoneNumber: "",
+      mobilePhone: "",
+      email: "",
+      locationName: "",
+      streetNo: "",
+      streetAddress: "",
+      block: "",
+      buildingNo: "",
+      country: "",
+      stateProvince: "",
+      city: "",
+      zipCode: "",
+      equipments: [], // Clear selected equipments
+      contactId: "",
     }));
+    setSelectedCustomer(selectedOption);
   };
 
   const handleContactChange = (selectedOption) => {
     setSelectedContact(selectedOption);
-    setFormData({
-      ...formData,
-      firstName: selectedOption.firstName || '',
-      middleName: selectedOption.middleName || '',
-      lastName: selectedOption.lastName || '',
-      phoneNumber: selectedOption.tel1 || '',
-      mobilePhone: selectedOption.tel2 || '',
-      email: selectedOption.email || ''
-    });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      contactId: selectedOption.contactId || "", // Update this line to include contactId
+      firstName: selectedOption.firstName || "",
+      middleName: selectedOption.middleName || "",
+      lastName: selectedOption.lastName || "",
+      phoneNumber: selectedOption.tel1 || "",
+      mobilePhone: selectedOption.tel2 || "",
+      email: selectedOption.email || "",
+    }));
   };
 
   const handleLocationChange = (selectedOption) => {
-    const selectedLocation = locations.find(location => location.value === selectedOption.value);
+    const selectedLocation = locations.find(
+      (location) => location.value === selectedOption.value
+    );
     setSelectedLocation(selectedLocation);
     setFormData({
       ...formData,
       locationName: selectedLocation.siteId,
-      streetNo: selectedLocation.streetNo || '',
-      streetAddress: selectedLocation.street || '',
-      block: selectedLocation.block || '',
-      buildingNo: selectedLocation.building || '',
-      country: selectedLocation.countryName || '',
-      stateProvince: '',
-      city: selectedLocation.city || '',
-      zipCode: selectedLocation.zipCode || ''
+      streetNo: selectedLocation.streetNo || "",
+      streetAddress: selectedLocation.street || "",
+      block: selectedLocation.block || "",
+      buildingNo: selectedLocation.building || "",
+      country: selectedLocation.countryName || "",
+      stateProvince: "",
+      city: selectedLocation.city || "",
+      zipCode: selectedLocation.zipCode || "",
     });
   };
 
   const handleSelectedEquipmentsChange = (selectedEquipments) => {
-    setFormData(prevFormData => ({
+    setFormData((prevFormData) => ({
       ...prevFormData,
-      equipments: selectedEquipments
+      equipments: selectedEquipments,
     }));
   };
 
@@ -222,25 +245,26 @@ const JobSummary = ({
     const { name, value, type, checked } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async () => {
     try {
-      const jobRef = doc(db, 'jobs', jobId);
+      const jobRef = doc(db, "jobs", jobId);
       await updateDoc(jobRef, formData);
-      alert('Job updated successfully!');
+
+      setActiveTab("scheduling");
     } catch (error) {
-      console.error('Error updating job:', error);
-      alert('Error updating the job!');
+      console.error("Error updating job:", error);
+      alert("Error updating the job!");
     }
   };
 
   return (
     <>
       <Form noValidate>
-        <Row className='mb-3'>
+        <Row className="mb-3">
           <Form.Group as={Col} md="7" controlId="customerList">
             <Form.Label>Search Customer</Form.Label>
             <Select
@@ -351,8 +375,12 @@ const JobSummary = ({
         </Row>
 
         <hr className="my-4" />
-        <h5 className="mb-1" style={{ cursor: 'pointer' }} onClick={toggleServiceLocation}>
-          Job Address {showServiceLocation ? '(-)' : '(+)'}
+        <h5
+          className="mb-1"
+          style={{ cursor: "pointer" }}
+          onClick={toggleServiceLocation}
+        >
+          Job Address {showServiceLocation ? "(-)" : "(+)"}
         </h5>
         {showServiceLocation && (
           <>
@@ -469,14 +497,21 @@ const JobSummary = ({
         )}
 
         <hr className="my-4" />
-        <h5 className="mb-1" style={{ cursor: 'pointer' }} onClick={toggleEquipments}>
-          Job Equipments {showEquipments ? '(-)' : '(+)'}
+        <h5
+          className="mb-1"
+          style={{ cursor: "pointer" }}
+          onClick={toggleEquipments}
+        >
+          Job Equipments {showEquipments ? "(-)" : "(+)"}
         </h5>
         {showEquipments && (
           <>
             <p className="text-muted">Details about the Equipments.</p>
-            <Row className='mb-3'>
-              <EquipmentsTable equipments={equipments} onSelectedRowsChange={handleSelectedEquipmentsChange} />
+            <Row className="mb-3">
+              <EquipmentsTable
+                equipments={equipments}
+                onSelectedRowsChange={handleSelectedEquipmentsChange}
+              />
             </Row>
           </>
         )}
@@ -484,9 +519,13 @@ const JobSummary = ({
       </Form>
       <Row className="align-items-center">
         <Col md={{ span: 4, offset: 8 }} xs={12} className="mt-1">
-          {/* <Button variant="primary" onClick={handleSubmit} className="float-end">
-            Update
-          </Button> */}
+          <Button
+            variant="primary"
+            onClick={handleSubmit}
+            className="float-end"
+          >
+            Next
+          </Button>
         </Col>
       </Row>
     </>
@@ -494,7 +533,6 @@ const JobSummary = ({
 };
 
 export default JobSummary;
-
 
 // import React, { useState, useEffect } from 'react';
 // import { Row, Col, Form, Button } from 'react-bootstrap';
@@ -985,7 +1023,6 @@ export default JobSummary;
 
 // export default JobSummary;
 
-
 // // import React, { useState, useEffect } from 'react';
 // // import { Row, Col, Form, Button } from 'react-bootstrap';
 // // import Select from 'react-select';
@@ -1461,8 +1498,6 @@ export default JobSummary;
 
 // // export default JobSummary;
 
-
-
 // // import React, { useState, useEffect } from 'react';
 // // import { Row, Col, Form, Button } from 'react-bootstrap';
 // // import Select from 'react-select';
@@ -1510,11 +1545,11 @@ export default JobSummary;
 // //       try {
 // //         const jobRef = doc(db, 'jobs', jobId);
 // //         const jobSnap = await getDoc(jobRef);
-  
+
 // //         if (jobSnap.exists()) {
 // //           const jobData = jobSnap.data();
 // //           setFormData(jobData);
-  
+
 // //           // Find the customer object that matches the customerName from jobData
 // //           const selectedCustomer = customers.find(
 // //             (customer) => customer.value === jobData.customerName
@@ -1527,12 +1562,11 @@ export default JobSummary;
 // //         console.error('Error fetching job data:', error);
 // //       }
 // //     };
-  
+
 // //     if (jobId) {
 // //       fetchJobData();
 // //     }
 // //   }, [jobId, customers]);
-  
 
 // //   const fetchCustomers = async () => {
 // //     try {
@@ -1929,7 +1963,6 @@ export default JobSummary;
 
 // // export default JobSummary;
 
-
 // // // import React, { useState, useEffect } from 'react';
 // // // import { Row, Col, Form, Button } from 'react-bootstrap';
 // // // import Select from 'react-select';
@@ -2006,15 +2039,13 @@ export default JobSummary;
 // // //       setCustomers(formattedOptions);
 // // //     } catch (error) {
 // // //       console.error('Error fetching customers:', error);
-// // //       setCustomers([]); 
+// // //       setCustomers([]);
 // // //     }
 // // //   };
 
 // // //   useEffect(() => {
 // // //     fetchCustomers();
 // // //   }, []);
-
-
 
 // // //   console.log(formData.customerName);
 
@@ -2033,7 +2064,6 @@ export default JobSummary;
 // // //       customerName: selectedOption ? selectedOption.value : ''
 // // //     }));
 // // //   };
-
 
 // // //  const handleSubmit = async () => {
 // // //     try {

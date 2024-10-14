@@ -10,12 +10,25 @@ import { collection, getDocs } from 'firebase/firestore';
 import { StatCenterInfo } from 'widgets';
 
 // Helper function to determine if a job is overdue
+// const isOverdue = (endDate, status) => {
+//   if (!endDate) return false;
+//   const today = new Date();
+//   const jobEndDate = new Date(endDate);
+//   return jobEndDate < today && status !== 'JC'; // Assuming 'JC' stands for 'Job Complete'
+// };
+
 const isOverdue = (endDate, status) => {
   if (!endDate) return false;
+  
   const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time to 00:00:00 to compare only the date
+
   const jobEndDate = new Date(endDate);
-  return jobEndDate < today && status !== 'JC'; // Assuming 'JC' stands for 'Job Complete'
+  jobEndDate.setHours(0, 0, 0, 0); // Reset time to 00:00:00 to compare only the date
+
+  return jobEndDate < today && status !== 'JC'; // Compare only the date
 };
+
 
 const TaskStats = () => {
   const [jobs, setJobs] = useState([]);
