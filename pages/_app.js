@@ -41,14 +41,14 @@ function MyApp({ Component, pageProps }) {
           title: title,
           description: description,
           site_name: process.env.siteName,
-          images: [
-            {
-              url: '#',
-              width: 1200,
-              height: 630,
-              alt: 'SAS - SAP B1 Portal',
-            },
-          ],
+          // images: [
+          //   {
+          //     url: '#',
+          //     width: 1200,
+          //     height: 630,
+          //     alt: 'SAS - SAP B1 Portal',
+          //   },
+          // ],
         }}
       />
       <Provider store={store}>

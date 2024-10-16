@@ -24,6 +24,7 @@ import { registerLicense } from "@syncfusion/ej2-base";
 registerLicense(process.env.REACT_APP_SYNCFUSION_LICENSE_KEY);
 
 const Calendar = () => {
+  const router = useRouter();
   const scheduleObj = useRef(null);
   const [events, setEvents] = useState([]); // Store events from Firebase
   const [searchTerm, setSearchTerm] = useState(""); // Search term state
@@ -158,8 +159,6 @@ const Calendar = () => {
   );
 
 const footerTemplate = (props) => {
-    const router = useRouter();
-  
     return (
       <div className={styles["quick-info-footer"]}>
         {props.elementType === "cell" ? (
@@ -255,33 +254,6 @@ const footerTemplate = (props) => {
       <Inject services={[Day, Week, Month, Resize, DragAndDrop]} />
     </ScheduleComponent>
   </div>
-    // <ScheduleComponent
-    //   ref={scheduleObj}
-    //   height="650px"
-    //   selectedDate={new Date(2024, 9, 15)}
-    //   eventSettings={{ dataSource: events }}
-    //   eventRendered={(args) => {
-    //     const colorStyle = getStatusColor(args.data.JobStatus);
-    //     args.element.style.backgroundColor = colorStyle.backgroundColor;
-    //     args.element.style.color = colorStyle.color;
-    //   }}
-    //   quickInfoTemplates={{
-    //     header: headerTemplate,
-    //     content: contentTemplate,
-    //     footer: footerTemplate,
-    //   }}
-    //   popupOpen={onPopupOpen}
-    //   cellDoubleClick={onCellDoubleClick} // Handle cell double-click
-    //   eventDoubleClick={onEventDoubleClick}
-    //   currentView="Month"
-    // >
-    //   <ViewsDirective>
-    //     <ViewDirective option="Day" />
-    //     <ViewDirective option="Week" />
-    //     <ViewDirective option="Month" />
-    //   </ViewsDirective>
-    //   <Inject services={[Day, Week, Month, Resize, DragAndDrop]} />
-    // </ScheduleComponent>
   );
 };
 
