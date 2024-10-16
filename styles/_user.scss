@@ -4,17 +4,21 @@
 //
 
 // SyncFusion
-@import "../node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-calendars/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
-@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
-@import '@syncfusion/ej2-react-schedule/styles/material.css';
+
+@import "../node_modules/@syncfusion/ej2-react-schedule/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-base/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-calendars/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-dropdowns/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/bootstrap5.3.css";
+@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/bootstrap5.3.css";
+@import '@syncfusion/ej2-base/styles/bootstrap5.css';
+@import '@syncfusion/ej2-react-grids/styles/bootstrap5.css';
+
+@import '@syncfusion/ej2-react-schedule/styles/bootstrap5.3.css';
 
 .drag-sample-wrapper {
     display: -ms-flexbox;
@@ -268,3 +272,36 @@
     color: white !important;  /* Ensure the text is visible on colored backgrounds */
     border-radius: 4px;  /* Optional: rounded corners for events */
 }
+
+
+
+// /// COLOR!
+
+// .e-schedule .e-schedule-toolbar .e-toolbar-items.e-tbar-pos,
+// .e-schedule .e-timeline-month-view .e-header-month-cell,
+// .e-schedule .e-timeline-month-view .e-header-week-cell,
+// .e-schedule .e-timeline-month-view .e-header-cells,
+// .e-schedule .e-timeline-month-view .e-work-cells  {
+//     background-color: #313135 !important;
+//     color: #FFF !important;
+//     border-color: #3B3B3F !important;
+// }
+
+// .e-schedule,
+// .e-schedule .e-resource-left-td,
+// .e-schedule .e-resource-cells,
+// .e-schedule .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn,
+// .e-schedule .e-timeline-month-view .e-work-cells.custom {
+//     background-color: #313135 !important;
+//     color: #FFF !important;
+//     border-color: #3B3B3F !important;
+// }
+// .e-schedule .e-tbar-btn-text,
+// .e-schedule .e-resource-text {
+//   color: #FFF !important;
+//   border-color: #3B3B3F !important;
+// }
+
+// .e-schedule .e-appointment {
+//   border: none !important;
+// }

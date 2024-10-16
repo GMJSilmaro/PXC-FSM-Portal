@@ -109,7 +109,7 @@ const ViewCustomers = () => {
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
-    }
+    },
   ];
 
   // Custom styles for the DataTable

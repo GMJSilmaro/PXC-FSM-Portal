@@ -84,7 +84,7 @@ const NavbarDefault = [
 		id: uuid(),
 		menuitem: 'Customers',
 		link: '#',
-		badge: 'NEW',
+		// badge: 'NEW',
 		children: [
 			{
 				id: uuid(),
@@ -98,7 +98,25 @@ const NavbarDefault = [
 			}
 		],
 	},
-
+	{
+		id: uuid(),
+		menuitem: 'Maps',
+		link: '#',
+		badge: 'NEW',
+		children: [
+			{
+				id: uuid(),
+				header: true,
+				header_text: 'Maps'
+			},
+			{
+				id: uuid(),
+				menuitem: 'View Map',
+				link: '/dashboard/map'
+			},
+			
+		],
+	},
 ];
 
 export default NavbarDefault;

@@ -845,6 +845,32 @@ const AddNewJobs = () => {
                 />
               </Form.Group>
             </Col>
+            {/* <Form.Group as={Col} md="2" controlId="scheduleSession">
+              <Form.Label>Service Call</Form.Label>
+              <Form.Select
+                name="scheduleSession"
+                value={formData.scheduleSession}
+                onChange={handleScheduleSessionChange}
+                aria-label="Select schedule session"
+              >
+                <option value="custom">Custom</option>
+                <option value="morning">Morning (9:30am to 1:00pm)</option>
+                <option value="afternoon">Afternoon (1:00pm to 5:30pm)</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group as={Col} md="2" controlId="scheduleSession">
+              <Form.Label>Sales Order</Form.Label>
+              <Form.Select
+                name="scheduleSession"
+                value={formData.scheduleSession}
+                onChange={handleScheduleSessionChange}
+                aria-label="Select schedule session"
+              >
+                <option value="custom">Custom</option>
+                <option value="morning">Morning (9:30am to 1:00pm)</option>
+                <option value="afternoon">Afternoon (1:00pm to 5:30pm)</option>
+              </Form.Select>
+            </Form.Group> */}
             <Form.Group as={Col} controlId="jobName">
               <Form.Label>Job Name</Form.Label>
               <Form.Control
@@ -855,6 +881,7 @@ const AddNewJobs = () => {
                 placeholder="Enter Job Name"
               />
             </Form.Group>
+            
           </Row>
           <Row className="mb-3">
             <Form.Group controlId="description">
@@ -898,12 +925,12 @@ const AddNewJobs = () => {
                   Select Status
                 </option>
                 <option value="C">Created</option>
-                <option value="CO">Confirm</option>
+                {/* <option value="CO">Confirm</option>
                 <option value="CA">Cancel</option>
                 <option value="JS">Job Started</option>
                 <option value="JC">Job Complete</option>
                 <option value="V">Validate</option>
-                <option value="S">Scheduled</option>
+                <option value="S">Scheduled</option> */}
               </Form.Select>
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="jobWorker">
@@ -952,6 +979,7 @@ const AddNewJobs = () => {
                 <option value="afternoon">Afternoon (1:00pm to 5:30pm)</option>
               </Form.Select>
             </Form.Group>
+        
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="startTime">
