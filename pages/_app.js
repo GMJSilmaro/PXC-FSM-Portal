@@ -14,6 +14,9 @@ import '../styles/theme.scss';
 import DefaultMarketingLayout from 'layouts/marketing/DefaultLayout';
 import DefaultDashboardLayout from 'layouts/dashboard/DashboardIndexTop';
 import { Fragment } from 'react';
+import { registerLicense } from "@syncfusion/ej2-base";
+
+registerLicense(process.env.REACT_APP_SYNCFUSION_LICENSE_KEY);
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
