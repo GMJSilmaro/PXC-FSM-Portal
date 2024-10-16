@@ -384,6 +384,11 @@ const WorkerSchedule = () => {
                 </ResourcesDirective>
                 <ViewsDirective>
                   <ViewDirective option="TimelineDay" />
+                  <ViewDirective
+                  option="TimelineWeek"
+                  timeScale={{ enable: true, interval: 180, slotCount: 3 }}
+                  interval={2}
+                  />
                   <ViewDirective option="TimelineMonth" />
                 </ViewsDirective>
                 <Inject services={[TimelineViews, TimelineMonth, Resize, DragAndDrop]} />

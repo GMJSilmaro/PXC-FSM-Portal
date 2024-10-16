@@ -168,6 +168,10 @@ const ViewJobs = () => {
     );
   };
 
+  const handleRowClick = (row) => {
+    router.push(`/dashboard/jobs/${row.id}`);
+  };
+
   // Custom Toggle for Dropdown
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <Button
@@ -408,6 +412,7 @@ const ViewJobs = () => {
                 paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 50]}
                 subHeaderAlign="left"
                 className={styles.dataTableRow} // Apply CSS module class
+                onRowClicked={handleRowClick}
               />
             </Card.Body>
           </Card>

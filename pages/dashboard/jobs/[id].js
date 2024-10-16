@@ -7,9 +7,9 @@ import { Row, Col, Card, Image, OverlayTrigger, Tooltip, Breadcrumb, ListGroup }
 import { Calendar4, Clock, TelephoneFill, PersonFill, CheckCircle, XCircle, PlayCircle, Check, ClipboardCheck, FileText, QuestionCircle } from "react-bootstrap-icons";
 import { LoadScript, GoogleMap, Marker } from "@react-google-maps/api"; // Google Map import
 import { GridComponent, ColumnsDirective, ColumnDirective, Page, Inject } from '@syncfusion/ej2-react-grids';
-import { registerLicense } from "@syncfusion/ej2-base";
+// import { registerLicense } from "@syncfusion/ej2-base";
 
-registerLicense(process.env.REACT_APP_SYNCFUSION_LICENSE_KEY);
+// registerLicense(process.env.REACT_APP_SYNCFUSION_LICENSE_KEY);
 // Helper function to fetch worker details from Firebase
 const fetchWorkerDetails = async (workerIds) => {
   const workersData = [];
